@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('title_ar');
             $table->string('title_en');
             $table->foreignId('question_id')->references('id')->on('questions')->onDelete('cascade');
-
             $table->timestamps();
         });
     }

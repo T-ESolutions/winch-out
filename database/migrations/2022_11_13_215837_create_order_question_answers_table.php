@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_question_id')->references('id')->on('order_questions')->onDelete('cascade');
             $table->string('answer');
-            $table->string('type');
+            $table->string('type')->comment("'text','radio','checkbox','image'");
+            $table->tinyInteger('provider_approval')->nullable()->comment("0=>rejected | 1=>accepted");
+            $table->text('reject_reason')->nullable();
             $table->timestamps();
         });
     }

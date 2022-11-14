@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title_ar');
             $table->string('title_en');
             $table->string('image')->nullable();
+            $table->tinyInteger('active')->default(1)->comment('0->un_active and 1->active');
             $table->timestamps();
         });
     }

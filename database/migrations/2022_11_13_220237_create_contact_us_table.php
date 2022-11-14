@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email')->nullable();
             $table->text('message');
+            $table->morphs('writer'); //provider       //user
             $table->timestamps();
         });
     }

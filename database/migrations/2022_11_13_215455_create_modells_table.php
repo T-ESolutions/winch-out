@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title_ar');
             $table->string('title_en');
             $table->foreignId('brand_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->tinyInteger('active')->default(1)->comment('0->un_active and 1->active');
             $table->timestamps();
         });
     }

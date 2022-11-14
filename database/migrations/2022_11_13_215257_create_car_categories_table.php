@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('car_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('title_ar');
+            $table->string('title_ar'); // السيارات الفارهه .... الخ
             $table->string('title_en');
+            $table->tinyInteger('active')->default(1)->comment('0->un_active and 1->active');
             $table->timestamps();
         });
     }

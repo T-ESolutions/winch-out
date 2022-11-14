@@ -17,19 +17,19 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->nullable()->unique();
-            $table->string('country_code');
-            $table->string('phone')->unique();
-            $table->string('user_phone')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('country_code')->default('+20'); //+20
+            $table->string('phone')->unique(); //1094641332
+            $table->string('user_phone')->unique(); //+201094641332
             $table->string('password');
-            $table->double('rate');
+            $table->double('rate')->default(0);
             $table->string('image')->nullable();
-            $table->string('provider_id')->nullable();
-            $table->string('provider_type')->nullable();
+            $table->string('social_id')->nullable(); //facebook //google
+            $table->string('social_type')->nullable(); //facebook //google
             $table->tinyInteger('active')->default(1)->comment('0->un_active and 1->active');
-            $table->integer('suspend')->default(0);
-            $table->timestamp('ios_deleted_at')->nullable();
+            $table->tinyInteger('suspend')->default(0);
             $table->string('fcm_token')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('ios_deleted_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_reviews', function (Blueprint $table) {
+        Schema::create('order_extra_services', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->morphs('target'); //user  // id=>10    //provide
-            $table->morphs('writer'); //provider  // id=>7     //user  id=10
-            $table->integer('rate');
-            $table->text('comment');
-            $table->integer('admin_approval')->nullable()->comment("0=>rejected | 1=>accepted");
+            $table->foreignId('service_id')->nullable()->references('id')->on('services')->onDelete('set null');
+            $table->json('service_data')->nullable();
+            $table->string('name');
+            $table->string('price');
+            $table->tinyInteger('user_approval')->nullable()->comment('0=>rejected | 1=>accepted');
             $table->text('reject_reason')->nullable();
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_reviews');
+        Schema::dropIfExists('order_extra_services');
     }
 };

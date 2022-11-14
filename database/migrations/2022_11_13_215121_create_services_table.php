@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('title_ar');
             $table->string('title_en');
             $table->double('price')->default(0);
-            $table->string('image');
-            $table->tinyInteger('is_distenated')->default(0)->comment('0->no drop off location and 1->is a drop off location');
+            $table->string('image')->nullable();
+            $table->tinyInteger('is_drop_off')->default(0)->comment('0->no drop off location and 1->is a drop off location');
             $table->tinyInteger('active')->default(1)->comment('0->un_active and 1->active');
             $table->timestamps();
         });

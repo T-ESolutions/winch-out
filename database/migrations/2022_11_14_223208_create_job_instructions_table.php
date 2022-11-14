@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('job_instructions', function (Blueprint $table) {
             $table->id();
             $table->string('title_ar');
             $table->string('title_en');
-            $table->enum('type',['text','radio','checkbox','image'])->default('text');
+            $table->enum('type',['user','provider'])->default('user');
             $table->tinyInteger('active')->default(1)->comment('0->un_active and 1->active');
-            $table->foreignId('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('job_instructions');
     }
 };

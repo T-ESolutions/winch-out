@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('body_en');
             $table->string('image');
             $table->string('icon');
+            $table->integer('sort')->default(1);
             $table->tinyInteger('active')->default(1)->comment('0->un_active and 1->active');
             $table->timestamps();
         });

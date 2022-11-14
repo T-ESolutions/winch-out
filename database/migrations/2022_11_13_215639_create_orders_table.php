@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_number')->unique();
-            $table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete('set null');
-            $table->foreignId('provider_id')->nullable()->references('id')->on('providers')->onDelete('set null');
+            $table->string('order_number')->unique();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreignId('provider_id')->nullable()->references('id')->on('providers')->onDelete('restrict');
             $table->text('notes')->nullable();
             $table->foreignId('service_id')->nullable()->references('id')->on('services')->onDelete('set null');
             $table->json('service_data');
+            $table->foreignId('service_car_category_id')->nullable()->references('id')->on('service_car_categories')->onDelete('set null');
             $table->json('brand_data');
             $table->json('modell_data');
             $table->string('car_year');
@@ -33,14 +34,19 @@ return new class extends Migration
             $table->double('total_distance_cost')->default(0);
             $table->double('service_cost')->default(0);
             $table->double('car_category_cost')->default(0);
-            $table->double('vat')->nullable();
-            $table->double('discount')->nullable();
+            $table->double('vat')->default(0);
+            $table->double('discount')->default(0);
+            $table->double('extra_service_cost')->default(0);
             $table->double('total_cost')->default(0);
-            $table->string('status_ar');
-            $table->string('status_en');
+            $table->string('status_ar')->comment('get this from table statuses');
+            $table->string('status_en')->comment('get this from table statuses');
             $table->string('cancel_reason')->nullable();
             $table->string('cancel_note')->nullable();
             $table->enum('cancel_by',['user','provider','admin'])->nullable();
+            $table->time('time_to_cancel')->nullable();  // 8:10  hours
+            $table->timestamp('reached_provider_at')->nullable();
+            $table->string('distance_to_pickup')->nullable();
+            $table->string('distance_to_drop_off')->nullable();
             $table->timestamps();
         });
     }

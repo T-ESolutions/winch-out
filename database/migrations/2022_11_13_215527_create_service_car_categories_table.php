@@ -23,7 +23,7 @@ return new class extends Migration
             $table->double('price')->default(0);
             $table->double('price_km')->default(0);
             $table->double('free_km')->default(0);
-            $table->double('vat');
+            $table->double('vat')->default(0);
             $table->timestamps();
         });
     }

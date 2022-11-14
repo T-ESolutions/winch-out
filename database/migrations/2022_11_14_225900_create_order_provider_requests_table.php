@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_reviews', function (Blueprint $table) {
+        Schema::create('order_provider_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->morphs('target'); //user  // id=>10    //provide
-            $table->morphs('writer'); //provider  // id=>7     //user  id=10
-            $table->integer('rate');
-            $table->text('comment');
-            $table->integer('admin_approval')->nullable()->comment("0=>rejected | 1=>accepted");
-            $table->text('reject_reason')->nullable();
+            $table->foreignId('provider_id')->references('id')->on('providers')->onDelete('cascade');
+            $table->enum('status',['pending','accepted','rejected'])->default('pending');
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_reviews');
+        Schema::dropIfExists('order_provider_requests');
     }
 };

@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('order_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->string('pickup_lat');
-            $table->string('pickup_lng');
-            $table->string('pickup_address');
-            $table->string('destination_lat')->nullable();
-            $table->string('destination_lng')->nullable();
-            $table->string('destination_address')->nullable();
+            $table->string('pickup_lat')->nullable();
+            $table->string('pickup_lng')->nullable();
+            $table->string('pickup_address')->nullable();
+            $table->string('drop_off_lat')->nullable();
+            $table->string('drop_off_lng')->nullable();
+            $table->string('drop_off_address')->nullable();
             $table->string('provider_lat')->nullable();
             $table->string('provider_lng')->nullable();
             $table->string('provider_address')->nullable();
