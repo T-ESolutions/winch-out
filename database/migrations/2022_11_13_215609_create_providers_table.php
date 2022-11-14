@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('providers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->nullable()->unique();
@@ -30,6 +30,10 @@ return new class extends Migration
             $table->integer('suspend')->default(0);
             $table->timestamp('ios_deleted_at')->nullable();
             $table->string('fcm_token')->nullable();
+            $table->enum('status',['pending','accepted','rejected'])->default('pending');
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
+            $table->string('address')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -42,6 +46,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('providers');
     }
 };
