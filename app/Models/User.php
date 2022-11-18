@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,11 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+protected $guarded  =[''];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +38,44 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function setPasswordAttribute($password)
+    {
+        if (!empty($password)) {
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
+
+
+    public function getImageAttribute($image)
+    {
+        if (!empty($image)) {
+            return asset('uploads/users') . '/' . $image;
+        }
+        return asset('uploads/default.jpg');
+    }
+
+    public function setImageAttribute($image)
+    {
+
+        if (is_file($image)) {
+            $imageFields = upload($image, 'users');
+            $this->attributes['image'] = $imageFields;
+        }else{
+            $this->attributes['image'] = $image ;
+        }
+
+    }
+
+    public function getJWTIdentifier()
+    {
+        // Implement getJWTIdentifier() method.
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        // Implement getJWTCustomClaims() method.
+//        return [];
+    }
 }
