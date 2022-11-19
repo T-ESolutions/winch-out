@@ -30,8 +30,6 @@ return new class extends Migration
             $table->string('drive_license_image')->nullable();
             $table->string('car_license_image')->nullable();
             $table->string('car_image')->nullable();
-            $table->string('provider_id')->nullable();
-            $table->string('provider_type')->nullable();
             $table->tinyInteger('active')->default(1)->comment('0->otp unchecked | 1->otp checked');
             $table->tinyInteger('suspend')->default(0);
             $table->tinyInteger('available')->default(0);
@@ -45,7 +43,6 @@ return new class extends Migration
             $table->tinyInteger('in_job')->default(0)->comment('0=> free | 1=> busy | 2=> ');
             $table->enum('type',['subscription','freelance'])->default('subscription');
             $table->double('app_percent')->default(0);
-
             $table->rememberToken();
             $table->timestamps();
         });

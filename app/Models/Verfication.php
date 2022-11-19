@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Verfication extends Model
 {
     use HasFactory;
+const TYPE =['activate', 'reset'];
 
-    protected $fillable = [
-        'phone', 'code', 'type', 'expired_at'
-    ];
+    protected $guarded=[''];
 }

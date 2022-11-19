@@ -18,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-protected $guarded  =[''];
+    protected $guarded = [''];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -57,14 +57,12 @@ protected $guarded  =[''];
 
     public function setImageAttribute($image)
     {
-
         if (is_file($image)) {
-            $imageFields = upload($image, 'users');
-            $this->attributes['image'] = $imageFields;
-        }else{
-            $this->attributes['image'] = $image ;
+            $img_name = upload($image, 'users');
+            $this->attributes['image'] = $img_name;
+        } else {
+            $this->attributes['image'] = $image;
         }
-
     }
 
     public function getJWTIdentifier()
@@ -77,5 +75,10 @@ protected $guarded  =[''];
     {
         // Implement getJWTCustomClaims() method.
 //        return [];
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
     }
 }
