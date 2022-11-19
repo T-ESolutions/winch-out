@@ -43,4 +43,44 @@ class Order extends Model
             return $this->status_en;
         }
     }
+
+    public function getServiceDataAttribute()
+    {
+        if ($this->attributes['service_data'] != null) {
+            return json_decode($this->attributes['service_data']);
+        }
+        return "";
+    }
+
+    public function setServiceDataAttribute()
+    {
+        $this->attributes['service_data'] = json_encode($this->attributes['service_data']);
+    }
+
+
+    public function getBrandDataAttribute()
+    {
+        if ($this->attributes['brand_data'] != null) {
+            return json_decode($this->attributes['brand_data']);
+        }
+        return "";
+    }
+
+    public function setBrandDataAttribute()
+    {
+        $this->attributes['brand_data'] = json_encode($this->attributes['brand_data']);
+    }
+
+    public function getModellDataAttribute()
+    {
+        if ($this->attributes['modell_data'] != null) {
+            return json_decode($this->attributes['modell_data']);
+        }
+        return "";
+    }
+
+    public function setModellDataAttribute()
+    {
+        $this->attributes['modell_data'] = json_encode($this->attributes['modell_data']);
+    }
 }

@@ -32,4 +32,16 @@ class OrderQuestion extends Model
         return $this->belongsTo(Service::class, 'service_id');
     }
 
+    public function getServiceDataAttribute()
+    {
+        if ($this->attributes['service_data'] != null) {
+            return json_decode($this->attributes['service_data']);
+        }
+        return "";
+    }
+
+    public function setServiceDataAttribute()
+    {
+        $this->attributes['service_data'] = json_encode($this->attributes['service_data']);
+    }
 }

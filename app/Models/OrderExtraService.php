@@ -27,4 +27,17 @@ class OrderExtraService extends Model
         return $query->where('user_approval', 1);
     }
 
+
+    public function getServiceDataAttribute()
+    {
+        if ($this->attributes['service_data'] != null) {
+            return json_decode($this->attributes['service_data']);
+        }
+        return "";
+    }
+
+    public function setServiceDataAttribute()
+    {
+        $this->attributes['service_data'] = json_encode($this->attributes['service_data']);
+    }
 }
