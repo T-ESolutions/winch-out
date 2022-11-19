@@ -232,20 +232,38 @@
                        href="{{route('admin.services')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/art/art002.svg-->
-                            <span class="svg-icon svg-icon-warning svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/General/Settings-2.svg--><svg
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <rect x="0" y="0" width="24" height="24"/>
-                                    <path
-                                        d="M5,8.6862915 L5,5 L8.6862915,5 L11.5857864,2.10050506 L14.4852814,5 L19,5 L19,9.51471863 L21.4852814,12 L19,14.4852814 L19,19 L14.4852814,19 L11.5857864,21.8994949 L8.6862915,19 L5,19 L5,15.3137085 L1.6862915,12 L5,8.6862915 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z"
-                                        fill="#000000"/>
-                                </g>
-                            </svg><!--end::Svg Icon-->
-                            </span>
+                            <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr035.svg-->
+<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path opacity="0.3" d="M2 9.09998V3C2 2.4 2.4 2 3 2H9.10001L2 9.09998ZM22 9.09998V3C22 2.4 21.6 2 21 2H14.9L22 9.09998ZM2 14.9V21C2 21.6 2.4 22 3 22H9.10001L2 14.9ZM14.9 22H21C21.6 22 22 21.6 22 21V14.9L14.9 22Z" fill="black"/>
+<path d="M19.2 17.8L13.4 12L19.2 6.20001L17.8 4.79999L12 10.6L6.2 4.79999L4.8 6.20001L10.6 12L4.8 17.8L6.2 19.2L12 13.4L17.8 19.2L19.2 17.8Z" fill="black"/>
+</svg></span>
+                            <!--end::Svg Icon-->
                             <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">اعدادات الخدمات</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link @if(request()->segment(2) == 'brands') active @endif"
+                       href="{{route('admin.brands')}}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/art/art002.svg-->
+                            <!--begin::Svg Icon | path: assets/media/icons/duotune/abstract/abs035.svg-->
+                                <span class="svg-icon svg-icon-muted svg-icon-2hx">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                                                        viewBox="0 0 24 24" fill="none">
+                                <path opacity="0.3"
+                                      d="M9.10001 7.00005L6.2 12H2C2 8.30005 4 5.10005 7 3.30005L9.10001 7.00005ZM17 3.30005L14.9 7.00005L17.8 12H22C22 8.30005 20 5.10005 17 3.30005ZM14.9 17H9.10001L7 20.7C8.5 21.6 10.2 22 12 22C13.8 22 15.5 21.5 17 20.7L14.9 17Z"
+                                      fill="black"/>
+                                <path
+                                    d="M17 3.3L14.9 7H9.10001L7 3.3C8.5 2.5 10.2 2 12 2C13.8 2 15.5 2.5 17 3.3ZM17.8 12L14.9 17L17 20.7C20 19 22 15.7 22 12H17.8ZM6.2 12H2C2 15.7 4 18.9 7 20.7L9.10001 17L6.2 12Z"
+                                    fill="black"/>
+                                </svg>
+                                </span>
+                            <!--end::Svg Icon-->
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">اعدادات البراندات</span>
                     </a>
                 </div>
 
