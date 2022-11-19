@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\ScreensController;
 use App\Http\Controllers\Admin\ServicesController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,18 @@ Route::group([
             Route::get('/show/{id}', [ServicesController::class, 'show'])->name('.show');
             Route::post('/delete', [ServicesController::class, 'delete'])->name('.delete');
             Route::post('/delete-multi', [ServicesController::class, 'deleteMulti'])->name('.deleteMulti');
+        });
+
+        Route::group(['prefix' => 'brands', 'as' => '.brands'], function () {
+            Route::get('/', [BrandsController::class, 'index']);
+            Route::get('getData', [BrandsController::class, 'getData'])->name('.datatable');
+            Route::get('/create', [BrandsController::class, 'create'])->name('.create');
+            Route::post('/store', [BrandsController::class, 'store'])->name('.store');
+            Route::get('/edit/{id}', [BrandsController::class, 'edit'])->name('.edit');
+            Route::post('/update', [BrandsController::class, 'update'])->name('.update');
+            Route::get('/show/{id}', [BrandsController::class, 'show'])->name('.show');
+            Route::post('/delete', [BrandsController::class, 'delete'])->name('.delete');
+            Route::post('/delete-multi', [BrandsController::class, 'deleteMulti'])->name('.deleteMulti');
         });
     });
 });
