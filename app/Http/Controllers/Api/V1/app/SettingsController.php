@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Api\V1\app;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BrandsResources;
+use App\Http\Resources\ModellsResources;
+use App\Http\Resources\PageDetailsResources;
 use App\Http\Resources\PagesResources;
 use App\Http\Resources\ScreenResources;
+use App\Models\Brand;
+use App\Models\Modell;
 use App\Models\Page;
 use App\Models\Screen;
 use Illuminate\Http\Request;
@@ -18,43 +23,49 @@ class SettingsController extends Controller
     {
         $settings = Setting::get();
 //        $screens = (ScreenResources::collection($screens));
-        return response()->json(msgdata($request, success(), trans('lang.success'), $settings));
+        return response()->json(msgdata(success(), trans('lang.success'), $settings));
     }
 
     public function custom_settings(Request $request, $key)
     {
         $key = $key . '_' . $request->header('lang');
         $data = Setting::where('key', $key)->first()->value;
-        return response()->json(msgdata($request, success(), trans('lang.success'), $data));
+        return response()->json(msgdata(success(), trans('lang.success'), $data));
     }
 
-    public function custom_settings_keys(Request $request)
+
+    public function pages()
     {
-        if ($request->header('lang')) {
-            $lang = $request->header('lang');
-        } else {
-            $lang = 'ar';
-        }
-        $data['working_hours'] = Setting::where('key', 'working_hours_' . $lang)->first()->value;
-        $data['shipp_value'] = Setting::where('key', 'shipp_value')->first()->value;
-        $data['freeze_days'] = Setting::where('key', 'freeze_days')->first()->value;
-        return response()->json(msgdata($request, success(), trans('lang.success'), $data));
+        $pages = Page::get();
+        $data = (PagesResources::collection($pages));
+        return response()->json(msgdata(success(), trans('lang.success'), $data));
     }
 
-    public function pages(Request $request, $type)
+    public function page_details(Request $request)
     {
-        $page = Page::where('type', $type)->first();
-        if (!$page) {
-            return response()->json(['status' => 401, 'msg' => trans('lang.page_not_found')]);
-        }
-        $data = (new PagesResources($page));
-        return response()->json(msgdata($request, success(), trans('lang.success'), $data));
+        $page = Page::findOrFail($request->id);
+        $data = (new PageDetailsResources($page));
+        return response()->json(msgdata(success(), trans('lang.success'), $data));
     }
 
-    public function screens(Request $request)
+    public function screens()
     {
         $screens = Screen::get();
         $screens = (ScreenResources::collection($screens));
-        return response()->json(msgdata($request, success(), trans('lang.success'), $screens));
+        return response()->json(msgdata(success(), trans('lang.success'), $screens));
+    }
+
+    public function brands()
+    {
+        $screens = Brand::paginate(pagination_number());
+        $screens = (BrandsResources::collection($screens))->response()->getData(true);
+        return response()->json(msgdata(success(), trans('lang.success'), $screens));
+    }
+
+    public function modells(Request $request)
+    {
+        $screens = Modell::active()->where('brand_id', $request->brand_id)->paginate(pagination_number());
+        $screens = (ModellsResources::collection($screens))->response()->getData(true);
+        return response()->json(msgdata(success(), trans('lang.success'), $screens));
     }
 }

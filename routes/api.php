@@ -25,6 +25,10 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
     Route::group(['prefix' => "app"], function () {
         //main screens
         Route::get('/screens', [SettingsController::class, 'screens']);
+        Route::get('/brands', [SettingsController::class, 'brands']);
+        Route::get('/brand/modells', [SettingsController::class, 'modells']);
+        Route::get('/pages', [SettingsController::class, 'pages']);
+        Route::get('/page/details', [SettingsController::class, 'page_details']);
         Route::get('/settings', [SettingsController::class, 'settings']);
         Route::get('/custom_settings', [SettingsController::class, 'custom_settings_keys']);
         Route::get('/settings/{key}', [SettingsController::class, 'custom_settings']);
