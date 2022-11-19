@@ -3,6 +3,12 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
+if (!function_exists('pagination_number')) {
+    function pagination_number()
+    {
+        return 6;
+    }
+}
 // send fcm notification
 function send_notification($title, $body, $details, $image, $data, $token)
 {

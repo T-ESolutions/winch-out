@@ -288,7 +288,7 @@ class AuthController extends Controller
             $userFound->save();
             $jwt_token = JWTAuth::fromUser($userFound);
             $data = (new UsersResources($userFound))->token($jwt_token);
-            return response()->json(msgdata($request, success(), trans('lang.success'), $data));
+            return response()->json(msgdata( success(), trans('lang.success'), $data));
         }
 
         // 3- if not login with social before
@@ -331,6 +331,6 @@ class AuthController extends Controller
 
         $jwt_token = JWTAuth::fromUser($user);
         $data = (new UsersResources($user))->token($jwt_token);
-        return response()->json(msgdata($request, success(), trans('lang.success'), $data));
+        return response()->json(msgdata( success(), trans('lang.success'), $data));
     }
 }
