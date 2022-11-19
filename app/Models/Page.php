@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
     use HasFactory;
-    protected $guarded=[''];
+
+    protected $guarded = [''];
 
     protected $appends = ['title', 'body'];
 
@@ -33,7 +34,7 @@ class Page extends Model
     public function getImageAttribute($image)
     {
         if (!empty($image)) {
-            return asset('uploads/screen') . '/' . $image;
+            return asset('uploads/pages') . '/' . $image;
         }
         return asset('default.png');
     }
@@ -41,12 +42,13 @@ class Page extends Model
     public function setImageAttribute($image)
     {
         if (is_file($image)) {
-            $img_name = upload($image, 'screen');
-            $this->attributes['image'] = $img_name ;
-        }else{
-            $this->attributes['image'] = $image ;
+            $img_name = upload($image, 'pages');
+            $this->attributes['image'] = $img_name;
+        } else {
+            $this->attributes['image'] = $image;
         }
     }
+
     public function scopeActive($query)
     {
         return $query->where('active', 1);
