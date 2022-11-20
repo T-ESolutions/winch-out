@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\auth\AuthController;
-use App\Http\Controllers\Api\V1\user\HomeController;
+use App\Http\Controllers\Api\V1\User\AuthController as Auth;
 use App\Http\Controllers\Api\V1\app\SettingsController;
 
 /*
@@ -20,6 +20,14 @@ use App\Http\Controllers\Api\V1\app\SettingsController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
+    Route::group(['prefix' => "auth"], function () {
+        //auth
+        Route::post('/login2', [Auth::class, 'login']);
+    });
+});
+
 
 Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
     Route::group(['prefix' => "app"], function () {
