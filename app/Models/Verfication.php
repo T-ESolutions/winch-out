@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Verfication extends Model
 {
     use HasFactory;
-const TYPE =['activate', 'reset'];
+    const TYPE =['activate', 'reset'];
 
     protected $guarded=[''];
 }
