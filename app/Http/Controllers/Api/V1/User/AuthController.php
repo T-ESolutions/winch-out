@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Interfaces\V1\User\AuthRepositoryInterface;
-use App\Http\Resources\UsersResources;
+use App\Http\Resources\V1\User\UsersResources;
 use App\Mail\SendCode;
 use App\Models\User;
 use App\Models\Verfication;
@@ -43,6 +43,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
+        $data = $this->userAuthRepository->login($request);
         $data = $this->userAuthRepository->login($request);
         if(is_string($data)){
             if($data == "phoneOrPasswordIncorrect"){

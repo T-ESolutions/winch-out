@@ -11,9 +11,5 @@ namespace App\Http\Controllers\Interfaces\V1\User;
 
 interface UserRepositoryInterface
 {
-    public function userById($id);
-    public function getNotification($id);
-    public function getChatList($attributes);
-    public function updateUser($attributes);
-    public function updatePassword($attributes);
+
 }
