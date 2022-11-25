@@ -9,7 +9,17 @@ class ServiceCarCategory extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'service_id',
+        'car_category_id',
+        'brand_id',
+        'modell_id',
+        'year',
+        'price',
+        'price_km',
+        'free_km',
+        'vat',
+    ];
 
     public function service()
     {

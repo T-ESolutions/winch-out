@@ -9,7 +9,11 @@ class OrderProviderRequest extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'order_id',
+        'provider_id',
+        'status',
+    ];
     const STATUS = ['pending', 'accepted', 'rejected'];
 
     public function order()

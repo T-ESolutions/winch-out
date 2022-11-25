@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Screen extends Model
 {
     use HasFactory;
-    protected $guarded=[''];
+
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'body_ar',
+        'body_en',
+        'image',
+        'active',
+    ];
 
     protected $appends = ['title', 'body'];
 
@@ -42,9 +50,9 @@ class Screen extends Model
     {
         if (is_file($image)) {
             $img_name = upload($image, 'screen');
-            $this->attributes['image'] = $img_name ;
-        }else{
-            $this->attributes['image'] = $image ;
+            $this->attributes['image'] = $img_name;
+        } else {
+            $this->attributes['image'] = $image;
         }
     }
 

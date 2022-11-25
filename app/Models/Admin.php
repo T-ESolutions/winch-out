@@ -9,7 +9,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Admin extends Authenticatable
 {
     use HasFactory;
-    protected $guarded=[''];
+
+    protected $fillable = [
+        'name', 'email', 'phone', 'password', 'image', 'active'
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime'
+    ];
 
     public function setPasswordAttribute($password)
     {

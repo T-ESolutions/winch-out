@@ -11,7 +11,36 @@ class Provider extends Authenticatable implements JWTSubject
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'name',
+        'email',
+        'country_code',
+        'phone',
+        'user_phone',
+        'email_verified_at',
+        'password',
+        'rate',
+        'social_id',
+        'social_type',
+        'image',
+        'id_image',
+        'drive_license_image',
+        'car_license_image',
+        'car_image',
+        'active',
+        'suspend',
+        'available',
+        'ios_deleted_at',
+        'fcm_token',
+        'status',
+        'lat',
+        'lng',
+        'address',
+        'parent_id',
+        'in_job',
+        'type',
+        'app_percent',
+    ];
 
     const STATUS = ['pending', 'accepted', 'rejected'];
     const TYPE = ['subscription', 'freelance'];

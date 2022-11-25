@@ -8,8 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class OrderQuestionAnswer extends Model
 {
     use HasFactory;
-    protected $guarded=[''];
-    const TYPE =['text','radio','checkbox','image'];
+
+    protected $fillable = [
+        'order_question_id',
+        'answer',
+        'type',
+        'provider_approval',
+        'reject_reason',
+    ];
+    const TYPE = ['text', 'radio', 'checkbox', 'image'];
 
     public function order_question()
     {

@@ -9,7 +9,15 @@ class OrderExtraService extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'order_id',
+        'service_id',
+        'service_data',
+        'name',
+        'price',
+        'user_approval',
+        'reject_reason',
+    ];
 
     public function order()
     {

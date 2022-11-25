@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     use HasFactory;
-    protected $guarded=[''];
+
+    protected $fillable = [
+        'title_ar', 'title_en', 'question_id'
+    ];
 
     protected $appends = ['title'];
 

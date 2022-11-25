@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class CarCategory extends Model
 {
     use HasFactory;
-    protected $guarded=[''];
+
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'active',
+    ];
 
     protected $appends = ['title'];
 

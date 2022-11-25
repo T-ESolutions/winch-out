@@ -8,8 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class CancelReason extends Model
 {
     use HasFactory;
-    protected $guarded=[''];
-    const TYPE =['user','provider'];
+
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'type',
+        'active',
+    ];
+    const TYPE = ['user', 'provider'];
 
     protected $appends = ['title'];
 

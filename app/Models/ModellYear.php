@@ -9,10 +9,10 @@ class ModellYear extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-//    modell_id
-//year
-
+    protected $fillable = [
+        'modell_id',
+        'year',
+    ];
     public function modell()
     {
         return $this->belongsTo(Modell::class, 'modell_id');

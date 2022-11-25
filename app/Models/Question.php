@@ -9,7 +9,13 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'type',
+        'active',
+        'service_id',
+    ];
 
     //Enumeration values
     const TYPE = ['text', 'radio', 'checkbox', 'image'];
