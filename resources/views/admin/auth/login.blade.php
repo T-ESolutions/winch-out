@@ -124,8 +124,9 @@
         <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
             <!--begin::Logo-->
             <a href="{{asset('/')}}" class="mb-12">
-                <img alt="Logo" src="{{asset('/')}}default.png" class=" "
-                     style="background-color: white; border-radius: 5px;padding: 10px;height:160px;width: 300px"/>
+{{--                background-color: white;--}}
+                <img alt="Logo" src="{{asset('/')}}default.png"
+                     style=" border-radius: 5px;padding: 10px;height:219px;width: 300px"/>
             </a>
             <!--end::Logo-->
             <!--begin::Wrapper-->
