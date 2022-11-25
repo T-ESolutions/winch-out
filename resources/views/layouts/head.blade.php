@@ -34,16 +34,16 @@
 
     <style>
         .app-f-color {
-            color: darkred !important;
+            color: #F48120 !important;
         }
 
         .app-bg-color {
-            background-color: darkred !important;
+            background-color: #F48120 !important;
         }
 
         .svg-icon-orange {
             transition: fill 0.3s ease;
-            fill: darkred !important;
+            fill: #F48120 !important;
         }
 
         @font-face {
@@ -56,7 +56,7 @@
         }
 
         /*.aside.aside-dark {*/
-        /*    background-color: darkred!important;*/
+        /*    background-color: #F48120!important;*/
         /*}*/
         .aside-dark .menu .menu-item .menu-link .menu-title {
             color: white;
@@ -67,15 +67,15 @@
         }
 
         .btn-secondary {
-            background-color: gray !important;
+            background-color: rgba(255, 136, 33, 0.71) !important;
         }
 
         .nav-line-tabs .nav-item .nav-link.active, .nav-line-tabs .nav-item.show .nav-link, .nav-line-tabs .nav-item .nav-link:hover:not(.disabled) {
-            border-bottom: 2px solid darkred !important;
+            border-bottom: 2px solid #F48120 !important;
         }
 
         .aside-dark .menu .menu-item .menu-link.active {
-            background-color: darkred !important;
+            background-color: #F48120 !important;
         }
 
         .aside-dark .menu .menu-item .menu-section {
@@ -104,8 +104,8 @@
         }
 
         .page-link {
-            background-color: darkred !important;
-            color: whitesmoke !important;
+            background-color: rgba(255, 136, 33, 0.71) !important;
+            color: #3F4254 !important;
         }
 
     </style>
