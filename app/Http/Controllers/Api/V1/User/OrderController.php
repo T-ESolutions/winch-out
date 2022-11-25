@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\user;
+namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CancelReasonResources;
+use App\Http\Controllers\Interfaces\V1\User\OrdersRepositoryInterface;
 use App\Http\Resources\ServicesResources;
-use App\Http\Resources\UsersResources;
-use App\Mail\SendCode;
-use App\Models\CancelReason;
 use App\Models\Service;
-use App\Models\User;
-use App\Models\Verfication;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Auth;
-use JWTAuth;
-use TymonJWTAuthExceptionsJWTException;
-use Mail;
 
 class OrderController extends Controller
 {
+    protected $orderRepo;
+
+    public function __construct(OrdersRepositoryInterface $orderRepo)
+    {
+        $this->orderRepo = $orderRepo;
+    }
+
+    public function MyOrder(Request $request){
+
+
+    }
+
+
     public function services(Request $request)
     {
         $data = Service::active()->paginate(pagination_number());
