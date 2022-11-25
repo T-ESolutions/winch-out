@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api\V1\app;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BrandsResources;
+use App\Http\Resources\V1\User\BrandsResources;
 use App\Http\Resources\CancelReasonResources;
 use App\Http\Resources\LinksResources;
-use App\Http\Resources\ModellsResources;
-use App\Http\Resources\PageDetailsResources;
-use App\Http\Resources\PagesResources;
-use App\Http\Resources\ScreenResources;
+use App\Http\Resources\V1\User\ModellsResources;
+use App\Http\Resources\V1\User\PageDetailsResources;
+use App\Http\Resources\V1\User\PagesResources;
+use App\Http\Resources\V1\User\ScreenResources;
 use App\Models\Brand;
 use App\Models\CancelReason;
 use App\Models\Link;
