@@ -1,31 +1,42 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\user;
+namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CancelReasonResources;
-use App\Http\Resources\ServicesResources;
-use App\Http\Resources\UsersResources;
-use App\Mail\SendCode;
-use App\Models\CancelReason;
-use App\Models\Service;
-use App\Models\User;
-use App\Models\Verfication;
-use Carbon\Carbon;
+use App\Http\Controllers\Interfaces\V1\User\HomeRepositoryInterface;
+use App\Http\Requests\V1\User\CalculateBrandCostRequest;
+use App\Http\Requests\V1\User\ServiceQuestionsRequest;
+use App\Http\Resources\V1\User\QuestionsResources;
+use App\Http\Resources\V1\User\ServicesResources;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Auth;
-use JWTAuth;
-use TymonJWTAuthExceptionsJWTException;
-use Mail;
 
 class HomeController extends Controller
 {
+    protected $homeRepo;
+
+    public function __construct(HomeRepositoryInterface $homeRepo)
+    {
+        $this->homeRepo = $homeRepo;
+    }
+
     public function services(Request $request)
     {
-        $data = Service::active()->paginate(pagination_number());
+        $data = $this->homeRepo->services($request);
         $data = (ServicesResources::collection($data))->response()->getData(true);
+        return response()->json(msgdata(success(), trans('lang.success'), $data));
+    }
+
+    public function serviceQuestions(ServiceQuestionsRequest $request)
+    {
+        $data = $this->homeRepo->serviceQuestions($request);
+        $data = (QuestionsResources::collection($data))->response()->getData(true);
+        return response()->json(msgdata(success(), trans('lang.success'), $data));
+    }
+
+    public function calculateBrandCost(CalculateBrandCostRequest $request)
+    {
+        $data = $this->homeRepo->serviceQuestions($request);
+        $data = (QuestionsResources::collection($data))->response()->getData(true);
         return response()->json(msgdata(success(), trans('lang.success'), $data));
     }
 

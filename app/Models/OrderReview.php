@@ -19,6 +19,16 @@ class OrderReview extends Model
         'reject_reason',
     ];
 
+    public function target()
+    {
+        return $this->morphTo();
+    }
+
+    public function writer()
+    {
+        return $this->morphTo();
+    }
+
     public function order()
     {
         return $this->belongsTo(Order::class, 'order_id');
