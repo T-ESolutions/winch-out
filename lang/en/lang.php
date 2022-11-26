@@ -12,6 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'unauthinticate' => 'you should login first',
     'coupon_send_s' => 'coupon used successfully',
     'phoneOrPasswordIncorrect' => 'phone Or Password Incorrect',
     'success' => 'done successfully',

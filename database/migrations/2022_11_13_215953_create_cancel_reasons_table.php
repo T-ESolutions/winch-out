@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title_ar');
             $table->string('title_en');
-            $table->enum('type',['user','provider'])->default('user');
+            $table->enum('type',['user_orders','provider_orders','user_extra_services'])->default('user_orders');
             $table->tinyInteger('active')->default(1)->comment('0->un_active and 1->active');
             $table->timestamps();
         });
