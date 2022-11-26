@@ -24,9 +24,10 @@ class CalculateBrandCostRequest extends FormRequest
     public function rules()
     {
         return [
-            'service_id'=>'required|exists:services,id',
-            'brand_id'=>'required|exists:brands,id',
-            'modell_id'=>'required|exists:modells,id,brand_id,'.$this->brand_id,
+            'service_id' => 'required|exists:services,id',
+            'brand_id' => 'required|exists:brands,id',
+            'modell_id' => 'required|exists:modells,id,brand_id,' . $this->brand_id,
+            'year_id' => 'required|exists:modell_years,id,modell_id,' . $this->modell_id,
         ];
     }
 }

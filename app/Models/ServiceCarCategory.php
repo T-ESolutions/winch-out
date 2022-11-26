@@ -41,6 +41,11 @@ class ServiceCarCategory extends Model
         return $this->belongsTo(Modell::class, 'modell_id');
     }
 
+    public function year()
+    {
+        return $this->belongsTo(ModellYear::class, 'year_id');
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class, 'service_car_category_id');

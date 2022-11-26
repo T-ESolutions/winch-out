@@ -16,4 +16,9 @@ class ContactUs extends Model
         'message',
         'writer',
     ];
+
+    public function writer()
+    {
+        return $this->morphTo();
+    }
 }

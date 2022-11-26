@@ -71,7 +71,7 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
             Route::group(['prefix' => "home"], function () {
                 Route::get('/services', [HomeController::class, 'services']);
                 Route::get('/service-questions', [HomeController::class, 'serviceQuestions']);
-                Route::get('/calculate-brand-cost', [HomeController::class, 'calculateBrandCost']);
+                Route::post('/calculate-brand-cost', [HomeController::class, 'calculateBrandCost']);
             });
             //more
             Route::post('/add_suggestion', [UserController::class, 'changePassword']);

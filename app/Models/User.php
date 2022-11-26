@@ -108,4 +108,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->morphMany(OrderReview::class, 'writer');
     }
+
+    public function contact()
+    {
+        return $this->morphMany(ContactUs::class, 'writer');
+    }
 }
