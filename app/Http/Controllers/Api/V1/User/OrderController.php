@@ -37,11 +37,4 @@ class OrderController extends Controller
     }
 
 
-    public function services(Request $request)
-    {
-        $data = Service::active()->paginate(pagination_number());
-        $data = (ServicesResources::collection($data))->response()->getData(true);
-        return response()->json(msgdata(success(), trans('lang.success'), $data));
-    }
-
 }

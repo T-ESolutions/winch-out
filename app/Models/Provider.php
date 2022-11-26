@@ -169,4 +169,15 @@ class Provider extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Order::class, 'provider_id');
     }
+
+    
+    public function reviewsReached()
+    {
+        return $this->morphMany(OrderReview::class, 'target');
+    }
+
+    public function reviewsWriter()
+    {
+        return $this->morphMany(OrderReview::class, 'writer');
+    }
 }
