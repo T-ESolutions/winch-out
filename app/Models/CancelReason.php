@@ -15,7 +15,7 @@ class CancelReason extends Model
         'type',
         'active',
     ];
-    const TYPE = ['user', 'provider'];
+    const TYPE = ['user_orders','provider_orders','user_extra_services'];
 
     protected $appends = ['title'];
 
