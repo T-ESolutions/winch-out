@@ -15,7 +15,7 @@ class OrdersRepository implements OrdersRepositoryInterface
         // TODO: Implement MyOrders() method.
         $order = Order::where('user_id', Auth::guard('api')->id())->with('provider');
         if ($request->type) {
-            $order->where('status', $request->type);
+            $order->where('status_en', $request->type);
         } else {
             $status = Status::active()->first();
             if ($status) {
