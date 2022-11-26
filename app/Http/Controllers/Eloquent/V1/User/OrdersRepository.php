@@ -13,17 +13,23 @@ class OrdersRepository implements OrdersRepositoryInterface
     public function MyOrders($request)
     {
         // TODO: Implement MyOrders() method.
-        $order = Order::where('user_id', Auth::guard('api')->id())->with('provider');
-        if ($request->type) {
-            $order->where('status_en', $request->type);
-        } else {
-            $status = Status::active()->first();
-            if ($status) {
-                $order->where('status', $status->title_en);
-            }
-        }
-        return $order;
-        $order->paginate(pagination_number());
+        $order = Order::where('user_id', Auth::guard('api')->id())
+            ->with('provider')
+            ->where(function ($q) use ($request) {
+                if ($request->type) {
+                    $q->where('status_key', $request->type);
+                } else {
+                    $q->where('status_key', 'current');
+                }
+            })->paginate(pagination_number());
 
+        return $order;
+
+    }
+
+    public function OrderDetails($request)
+    {
+        $order = Order::whereId($request->order_id)->first();
+        return $order;
     }
 }
