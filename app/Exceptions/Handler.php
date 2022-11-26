@@ -61,10 +61,10 @@ class Handler extends ExceptionHandler
 
     protected function invalidJson($request, ValidationException $exception)
     {
+
         return response()->json([
             'status' => failed(),
-            'msg' => trans('lang.error'),
-            'data' => $exception->errors(),
+            'msg' => array_values($exception->errors())[0][0]
         ]);
     }
 }

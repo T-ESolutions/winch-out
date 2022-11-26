@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->enum('key',['current','finished','canceled'])->default('current');
+            $table->enum('key',['current','finished','canceled','arrived'])->default('current');
             $table->string('title_ar');
             $table->string('title_en');
             $table->tinyInteger('active')->default(1)->comment('0->un_active and 1->active');

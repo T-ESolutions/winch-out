@@ -8,6 +8,7 @@ use App\Http\Requests\V1\User\MyOrdersRequest;
 use App\Http\Requests\V1\User\OrderDetailsRequest;
 use App\Http\Resources\ServicesResources;
 use App\Http\Resources\V1\User\MyOrdersResource;
+use App\Http\Resources\V1\User\OrderDetailsResource;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,8 @@ class OrderController extends Controller
     public function OrderDetails(OrderDetailsRequest $request){
 
         $order_details = $this->orderRepo->OrderDetails($request);
-
+        $data = new OrderDetailsResource($order_details);
+        return response()->json(msgdata(success(), trans('lang.success'), $data));
     }
 
 

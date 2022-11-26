@@ -19,7 +19,7 @@ class OrdersRepository implements OrdersRepositoryInterface
                 if ($request->type) {
                     $q->where('status_key', $request->type);
                 } else {
-                    $q->where('status_key', 'current');
+                    $q->whereNotIn('status_key', [finished(), canceled()]);
                 }
             })->paginate(pagination_number());
 
