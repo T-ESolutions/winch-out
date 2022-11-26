@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\User\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\auth\AuthController;
@@ -46,6 +47,7 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
         Route::get('/settings/{key}', [SettingsController::class, 'custom_settings']);
         Route::get('/pages/{type}', [SettingsController::class, 'pages']);
     });
+
     Route::group(['prefix' => "auth"], function () {
         //auth
         Route::post('/login', [AuthController::class, 'login']);
@@ -65,10 +67,12 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
         Route::group(['prefix' => "user"], function () {
             //home
             Route::get('/services', [HomeController::class, 'services']);
-
             //more
             Route::post('/add_suggestion', [UserController::class, 'changePassword']);
-
+            //orders
+            Route::group(['prefix' => "orders"], function () {
+                Route::get('/', [OrderController::class, 'MyOrders']);
+            });
         });
     });
 });
