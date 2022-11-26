@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -46,5 +47,14 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if (in_array('auth:api', $request->route()->action['middleware'])) {
+            return response()->json(msg(not_authoize(), trans('lang.unauthinticate')));
+        }
+
+        return redirect()->guest(route('login'));
     }
 }
