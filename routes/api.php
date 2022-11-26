@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\User\OrderController;
+use App\Http\Controllers\Api\V1\User\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
@@ -79,6 +80,10 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
             Route::group(['prefix' => "orders"], function () {
                 Route::get('/', [OrderController::class, 'myOrders']);
                 Route::get('/details', [OrderController::class, 'orderDetails']);
+            });
+            //Reviews
+            Route::group(['prefix' => "reviews"], function () {
+                Route::get('/', [ReviewController::class, 'providerReviews']);
             });
         });
 

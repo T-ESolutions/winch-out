@@ -28,7 +28,7 @@ class ReviewController extends Controller
     {
 
         $reviews = $this->reviewRepo->providerReviews($request);
-        $data = ProviderReviewResource::collection($reviews)->response()->getData(true);
+        $data = ProviderReviewResource::collection($reviews);
         return response()->json(msgdata(success(), trans('lang.success'), $data));
     }
 
