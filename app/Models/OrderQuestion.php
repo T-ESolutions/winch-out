@@ -34,6 +34,13 @@ class OrderQuestion extends Model
         return $this->belongsTo(Order::class, 'order_id');
     }
 
+
+    public function answers()
+    {
+        return $this->hasMany(OrderQuestionAnswer::class, 'order_question_id');
+    }
+
+
     public function service()
     {
         return $this->belongsTo(Service::class, 'service_id');

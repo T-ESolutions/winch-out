@@ -53,6 +53,31 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function Order_status()
+    {
+        return $this->hasMany(OrderStatus::class, 'order_id');
+    }
+
+    public function User_Order_images()
+    {
+        return $this->hasMany(OrderImage::class, 'order_id')->where('type', 'user');
+    }
+
+    public function Order_extra_services()
+    {
+        return $this->hasMany(OrderExtraService::class, 'order_id')->select('id', 'name', 'price', 'order_id');
+    }
+
+    public function Order_Address()
+    {
+        return $this->hasOne(OrderAddress::class, 'order_id');
+    }
+
+    public function Order_Questions()
+    {
+        return $this->hasMany(OrderQuestion::class, 'order_id');
+    }
+
     public function provider()
     {
         return $this->belongsTo(Provider::class, 'provider_id');
