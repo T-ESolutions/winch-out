@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\auth\AuthController;
+use App\Http\Controllers\Api\V1\User\AuthController;
 use App\Http\Controllers\Api\V1\user\HomeController;
 use App\Http\Controllers\Api\V1\user\UserController;
 use App\Http\Controllers\Api\V1\app\SettingsController;
@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
     Route::group(['prefix' => "auth"], function () {
         //auth
-        Route::post('/login2', [AuthController::class, 'login']);
+        Route::post('/login', [AuthController::class, 'login']);
     });
 });
 
@@ -48,7 +48,7 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
     });
     Route::group(['prefix' => "auth"], function () {
         //auth
-        Route::post('/login', [AuthController::class, 'login']);
+//        Route::post('/login', [AuthController::class, 'login']);
         Route::post('/sign-up', [AuthController::class, 'SignUp']);
         Route::post('/verify', [AuthController::class, 'Verify']);
         Route::post('/resend-code', [AuthController::class, 'resendCode']);

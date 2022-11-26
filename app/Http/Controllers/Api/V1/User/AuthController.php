@@ -44,7 +44,6 @@ class AuthController extends Controller
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
         $data = $this->userAuthRepository->login($request);
-        $data = $this->userAuthRepository->login($request);
         if(is_string($data)){
             if($data == "phoneOrPasswordIncorrect"){
                 return response()->json(msg(failed(), trans('lang.phoneOrPasswordIncorrect')));
