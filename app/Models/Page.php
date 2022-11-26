@@ -9,7 +9,16 @@ class Page extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'body_ar',
+        'body_en',
+        'image',
+        'icon',
+        'sort',
+        'active',
+    ];
 
     protected $appends = ['title', 'body'];
 

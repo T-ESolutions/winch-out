@@ -40,5 +40,9 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Http\Controllers\Interfaces\V1\User\UserRepositoryInterface',
             'App\Http\Controllers\Eloquent\V1\User\UserRepository'
         );
+        $this->app->bind(
+            'App\Http\Controllers\Interfaces\V1\User\ReviewRepositoryInterface',
+            'App\Http\Controllers\Eloquent\V1\User\ReviewRepository'
+        );
     }
 }

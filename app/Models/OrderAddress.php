@@ -9,7 +9,18 @@ class OrderAddress extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'order_id',
+        'pickup_lat',
+        'pickup_lng',
+        'pickup_address',
+        'drop_off_lat',
+        'drop_off_lng',
+        'drop_off_address',
+        'provider_lat',
+        'provider_lng',
+        'provider_address',
+    ];
 
     public function order()
     {

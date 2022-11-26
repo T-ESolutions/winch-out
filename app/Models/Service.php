@@ -9,7 +9,14 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'price',
+        'image',
+        'is_drop_off',
+        'active',
+    ];
 
     protected $appends = ['title'];
 

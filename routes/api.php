@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Api\V1\User\OrderController;
+use App\Http\Controllers\Api\V1\User\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\User\AuthController;
 use App\Http\Controllers\Api\V1\user\HomeController;
 use App\Http\Controllers\Api\V1\user\UserController;
 use App\Http\Controllers\Api\V1\app\SettingsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,16 +39,18 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
         Route::get('/screens', [SettingsController::class, 'screens']);
         Route::get('/brands', [SettingsController::class, 'brands']);
         Route::get('/brand/modells', [SettingsController::class, 'modells']);
+        Route::get('/modell/years', [SettingsController::class, 'years']);
+
         Route::get('/pages', [SettingsController::class, 'pages']);
         Route::get('/page/details', [SettingsController::class, 'page_details']);
+
         Route::get('/cancel_reasons', [SettingsController::class, 'cancel_reasons']);
         Route::get('/links', [SettingsController::class, 'links']);
 
         Route::get('/settings', [SettingsController::class, 'settings']);
-        Route::get('/custom_settings', [SettingsController::class, 'custom_settings_keys']);
         Route::get('/settings/{key}', [SettingsController::class, 'custom_settings']);
-        Route::get('/pages/{type}', [SettingsController::class, 'pages']);
     });
+
     Route::group(['prefix' => "auth"], function () {
         //auth
 //        Route::post('/login', [AuthController::class, 'login']);
@@ -62,13 +67,26 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
             Route::post('/change-password', [AuthController::class, 'changePassword']);
             Route::post('/update-profile', [AuthController::class, 'UpdateProfile']);
         });
+
         Route::group(['prefix' => "user"], function () {
             //home
-            Route::get('/services', [HomeController::class, 'services']);
-
+            Route::group(['prefix' => "home"], function () {
+                Route::get('/services', [HomeController::class, 'services']);
+                Route::get('/service-questions', [HomeController::class, 'serviceQuestions']);
+                Route::post('/calculate-brand-cost', [HomeController::class, 'calculateBrandCost']);
+            });
             //more
             Route::post('/add_suggestion', [UserController::class, 'changePassword']);
-
+            //orders
+            Route::group(['prefix' => "orders"], function () {
+                Route::get('/', [OrderController::class, 'myOrders']);
+                Route::get('/details', [OrderController::class, 'orderDetails']);
+            });
+            //Reviews
+            Route::group(['prefix' => "reviews"], function () {
+                Route::get('/', [ReviewController::class, 'providerReviews']);
+            });
         });
+
     });
 });

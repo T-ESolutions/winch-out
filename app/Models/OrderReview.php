@@ -8,7 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class OrderReview extends Model
 {
     use HasFactory;
-    protected $guarded=[''];
+
+    protected $fillable = [
+        'order_id',
+        'target',
+        'writer',
+        'rate',
+        'comment',
+        'admin_approval',
+        'reject_reason',
+    ];
+
+    public function target()
+    {
+        return $this->morphTo();
+    }
+
+    public function writer()
+    {
+        return $this->morphTo();
+    }
 
     public function order()
     {

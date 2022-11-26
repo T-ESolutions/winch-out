@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\app;
+namespace App\Http\Controllers\Api\V1\App;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\User\BrandsResources;
@@ -10,10 +10,12 @@ use App\Http\Resources\V1\User\ModellsResources;
 use App\Http\Resources\V1\User\PageDetailsResources;
 use App\Http\Resources\V1\User\PagesResources;
 use App\Http\Resources\V1\User\ScreenResources;
+use App\Http\Resources\V1\User\YearsResources;
 use App\Models\Brand;
 use App\Models\CancelReason;
 use App\Models\Link;
 use App\Models\Modell;
+use App\Models\ModellYear;
 use App\Models\Page;
 use App\Models\Screen;
 use Illuminate\Http\Request;
@@ -51,9 +53,10 @@ class SettingsController extends Controller
         $data = (new PageDetailsResources($page));
         return response()->json(msgdata(success(), trans('lang.success'), $data));
     }
+
     public function cancel_reasons(Request $request)
     {
-        $data = CancelReason::active()->where('type',$request->type)->paginate(pagination_number());
+        $data = CancelReason::active()->where('type', $request->type)->paginate(pagination_number());
         $data = (CancelReasonResources::collection($data))->response()->getData(true);
         return response()->json(msgdata(success(), trans('lang.success'), $data));
     }
@@ -83,6 +86,13 @@ class SettingsController extends Controller
     {
         $screens = Modell::active()->where('brand_id', $request->brand_id)->paginate(pagination_number());
         $screens = (ModellsResources::collection($screens))->response()->getData(true);
+        return response()->json(msgdata(success(), trans('lang.success'), $screens));
+    }
+
+    public function years(Request $request)
+    {
+        $screens = ModellYear::where('modell_id', $request->modell_id)->paginate(pagination_number());
+        $screens = (YearsResources::collection($screens))->response()->getData(true);
         return response()->json(msgdata(success(), trans('lang.success'), $screens));
     }
 }

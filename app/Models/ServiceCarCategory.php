@@ -9,7 +9,17 @@ class ServiceCarCategory extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'service_id',
+        'car_category_id',
+        'brand_id',
+        'modell_id',
+        'year',
+        'price',
+        'price_km',
+        'free_km',
+        'vat',
+    ];
 
     public function service()
     {
@@ -29,6 +39,11 @@ class ServiceCarCategory extends Model
     public function modell()
     {
         return $this->belongsTo(Modell::class, 'modell_id');
+    }
+
+    public function year()
+    {
+        return $this->belongsTo(ModellYear::class, 'year_id');
     }
 
     public function orders()

@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     use HasFactory;
-    protected $guarded=[''];
+
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'image',
+        'active',
+    ];
 
     protected $appends = ['title'];
 
@@ -38,9 +44,9 @@ class Brand extends Model
     {
         if (is_file($image)) {
             $img_name = upload($image, 'brands');
-            $this->attributes['image'] = $img_name ;
-        }else{
-            $this->attributes['image'] = $image ;
+            $this->attributes['image'] = $img_name;
+        } else {
+            $this->attributes['image'] = $image;
         }
     }
 }

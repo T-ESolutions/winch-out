@@ -9,7 +9,12 @@ class JobInstruction extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'type',
+        'active',
+    ];
 
     protected $appends = ['title'];
     const TYPE = ['user', 'provider'];

@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Modell extends Model
 {
     use HasFactory;
-    protected $guarded=[''];
+
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'brand_id',
+        'active',
+    ];
 
     protected $appends = ['title'];
 

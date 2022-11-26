@@ -8,6 +8,7 @@ use App\Models\CancelReason;
 use App\Models\CarCategory;
 use App\Models\Link;
 use App\Models\Modell;
+use App\Models\ModellYear;
 use App\Models\Page;
 use App\Models\Provider;
 use App\Models\User;
@@ -152,7 +153,24 @@ class PagesSeeder extends Seeder
                     ],
                 ];
                 foreach ($modells as $row) {
-                    Modell::updateOrCreate($row);
+                    $modell = Modell::updateOrCreate($row);
+
+                    if ($modell) {
+                        $years = [
+                            [
+                                'year' => '2020',
+
+                                'modell_id' => $modell->id,
+                            ],
+                            [
+                                'year' => '2022',
+                                'modell_id' => $modell->id,
+                            ],
+                        ];
+                        foreach ($years as $year_row) {
+                            ModellYear::updateOrCreate($year_row);
+                        }
+                    }
                 }
             }
         }
@@ -161,32 +179,42 @@ class PagesSeeder extends Seeder
             [
                 'title_ar' => 'رجل الصيانة تأخر جدا',
                 'title_en' => 'provider is too late',
-                'type' => 'user',
+                'type' => 'user_orders',
             ],
             [
                 'title_ar' => 'لقد تم اصلاح العطل',
                 'title_en' => 'i fix the problem',
-                'type' => 'user',
+                'type' => 'user_orders',
             ],
             [
                 'title_ar' => 'قله تكلفة التصليح',
                 'title_en' => 'Less repair cost',
-                'type' => 'provider',
+                'type' => 'provider_orders',
             ],
             [
                 'title_ar' => '2قله تكلفة التصليح',
                 'title_en' => 'Less repair cost2',
-                'type' => 'provider',
+                'type' => 'provider_orders',
             ],
             [
                 'title_ar' => '3قله تكلفة التصليح',
                 'title_en' => 'Less repair cost3',
-                'type' => 'provider',
+                'type' => 'provider_orders',
             ],
             [
                 'title_ar' => 'قله تكلفة التصليح4',
                 'title_en' => 'Less repair cost4',
-                'type' => 'provider',
+                'type' => 'provider_orders',
+            ],
+            [
+                'title_ar' => '5قله تكلفة التصليح',
+                'title_en' => 'Less repair cost3',
+                'type' => 'user_extra_services',
+            ],
+            [
+                'title_ar' => 'قله تكلفة التصليح6',
+                'title_en' => 'Less repair cost4',
+                'type' => 'user_extra_services',
             ],
 
         ];

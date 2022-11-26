@@ -169,6 +169,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'service_id'=>'service',
+    ],
 
 ];

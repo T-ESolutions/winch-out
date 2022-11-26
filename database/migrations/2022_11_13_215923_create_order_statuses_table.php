@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('order_statuses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->string('status_key')->comment('get this from table statuses');
             $table->string('status_ar')->comment('when order created load all statuses table data');
             $table->string('status_en');
             $table->date('status_date')->nullable();
+
             $table->timestamps();
         });
     }

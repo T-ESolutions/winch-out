@@ -248,6 +248,7 @@ return [
         'coupon_code'=>'كوبون الخصم',
         'old_date'=>'التاريخ القديم',
         'new_date'=>'التاريخ الجديد',
+        'provider_id'=>'السائق',
 
 
 

@@ -2,7 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Enums\ResponceStatusCode;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -47,4 +51,24 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if (in_array('auth:api', $request->route()->action['middleware'])) {
+            return response()->json(msg(not_authoize(), trans('lang.unauthinticate')));
+        }
+
+        return redirect()->guest(route('login'));
+    }
+
+    protected function invalidJson($request, ValidationException $exception)
+    {
+
+        return response()->json([
+            'status' => failed(),
+            'msg' => array_values($exception->errors())[0][0]
+        ]);
+    }
+
+
 }

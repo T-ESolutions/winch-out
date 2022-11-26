@@ -18,7 +18,24 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $guarded = [''];
+    protected $fillable = [
+        'name',
+        'email',
+        'country_code',
+        'phone',
+        'user_phone',
+        'password',
+        'rate',
+        'image',
+        'social_id',
+        'social_type',
+        'active',
+        'suspend',
+        'fcm_token',
+        'email_verified_at',
+        'ios_deleted_at',
+        'device_token',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -80,5 +97,20 @@ class User extends Authenticatable implements JWTSubject
     public function orders()
     {
         return $this->hasMany(Order::class, 'user_id');
+    }
+
+    public function reviewsReached()
+    {
+        return $this->morphMany(OrderReview::class, 'target');
+    }
+
+    public function reviewsWriter()
+    {
+        return $this->morphMany(OrderReview::class, 'writer');
+    }
+
+    public function contact()
+    {
+        return $this->morphMany(ContactUs::class, 'writer');
     }
 }

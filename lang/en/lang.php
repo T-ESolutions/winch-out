@@ -12,6 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'unauthinticate' => 'you should login first',
     'coupon_send_s' => 'coupon used successfully',
     'phoneOrPasswordIncorrect' => 'phone Or Password Incorrect',
     'success' => 'done successfully',
@@ -39,7 +40,6 @@ return [
     'no_main_meals' => 'There are no types of meals in the selected package',
     'no_period_selected' => 'There is no time period created, you must choose a correct period',
     'order_in_cancelled_request' => 'cancel request updated',
-    'freeze_success' => 'day selected frozen successfully',
     'noOrderMeals' => 'no days for this order!',
     'PhoneExists' => 'Phone Exists please use other phone!',
 

@@ -9,7 +9,13 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'title_ar',
+        'title_en',
+        'type',
+        'active',
+        'service_id',
+    ];
 
     //Enumeration values
     const TYPE = ['text', 'radio', 'checkbox', 'image'];
@@ -34,4 +40,10 @@ class Question extends Model
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class, 'question_id');
+    }
+
 }

@@ -11,7 +11,36 @@ class Provider extends Authenticatable implements JWTSubject
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'name',
+        'email',
+        'country_code',
+        'phone',
+        'user_phone',
+        'email_verified_at',
+        'password',
+        'rate',
+        'social_id',
+        'social_type',
+        'image',
+        'id_image',
+        'drive_license_image',
+        'car_license_image',
+        'car_image',
+        'active',
+        'suspend',
+        'available',
+        'ios_deleted_at',
+        'fcm_token',
+        'status',
+        'lat',
+        'lng',
+        'address',
+        'parent_id',
+        'in_job',
+        'type',
+        'app_percent',
+    ];
 
     const STATUS = ['pending', 'accepted', 'rejected'];
     const TYPE = ['subscription', 'freelance'];
@@ -139,5 +168,21 @@ class Provider extends Authenticatable implements JWTSubject
     public function orders()
     {
         return $this->hasMany(Order::class, 'provider_id');
+    }
+
+
+    public function reviewsReached()
+    {
+        return $this->morphMany(OrderReview::class, 'target')->approval();
+    }
+
+    public function reviewsWriter()
+    {
+        return $this->morphMany(OrderReview::class, 'writer')->approval();
+    }
+
+    public function contact()
+    {
+        return $this->morphMany(ContactUs::class, 'writer');
     }
 }

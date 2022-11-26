@@ -9,7 +9,40 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $fillable = [
+        'order_number',
+        'user_id',
+        'provider_id',
+        'notes',
+        'service_id',
+        'service_data',
+        'service_car_category_id',
+        'brand_data',
+        'modell_data',
+        'car_year',
+        'car_color',
+        'distance',
+        'price_km',
+        'price_km_cost',
+        'free_km',
+        'free_km_cost',
+        'total_distance_cost',
+        'service_cost',
+        'car_category_cost',
+        'vat',
+        'discount',
+        'extra_service_cost',
+        'total_cost',
+        'status_ar',
+        'status_en',
+        'cancel_reason',
+        'cancel_note',
+        'cancel_by',
+        'time_to_cancel',
+        'reached_provider_at',
+        'distance_to_pickup',
+        'distance_to_drop_off',
+    ];
 
     const CANCEL = ['user', 'provider', 'admin'];
 
@@ -18,6 +51,31 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function Order_status()
+    {
+        return $this->hasMany(OrderStatus::class, 'order_id');
+    }
+
+    public function User_Order_images()
+    {
+        return $this->hasMany(OrderImage::class, 'order_id')->where('type', 'user');
+    }
+
+    public function Order_extra_services()
+    {
+        return $this->hasMany(OrderExtraService::class, 'order_id')->select('id', 'name', 'price', 'order_id');
+    }
+
+    public function Order_Address()
+    {
+        return $this->hasOne(OrderAddress::class, 'order_id');
+    }
+
+    public function Order_Questions()
+    {
+        return $this->hasMany(OrderQuestion::class, 'order_id');
     }
 
     public function provider()

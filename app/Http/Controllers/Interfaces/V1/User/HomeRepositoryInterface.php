@@ -11,5 +11,8 @@ namespace App\Http\Controllers\Interfaces\V1\User;
 
 interface HomeRepositoryInterface
 {
+    public function services($request);
+    public function serviceQuestions($request);
+    public function calculateBrandCost($request);
 
 }

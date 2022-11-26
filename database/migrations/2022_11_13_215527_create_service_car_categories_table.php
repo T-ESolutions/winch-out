@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('car_category_id')->references('id')->on('car_categories')->onDelete('cascade');
             $table->foreignId('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->foreignId('modell_id')->references('id')->on('modells')->onDelete('cascade');
-            $table->string('year');
+            $table->foreignId('year_id')->references('id')->on('modell_years')->onDelete('cascade');
             $table->double('price')->default(0);
             $table->double('price_km')->default(0);
             $table->double('free_km')->default(0);

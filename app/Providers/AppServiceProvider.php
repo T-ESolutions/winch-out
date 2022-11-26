@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
                 App::setLocale('ar');
             }
         }
+
+
     }
 }
