@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Enums\ResponceStatusCode;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Throwable;
@@ -67,4 +69,6 @@ class Handler extends ExceptionHandler
             'msg' => array_values($exception->errors())[0][0]
         ]);
     }
+
+
 }

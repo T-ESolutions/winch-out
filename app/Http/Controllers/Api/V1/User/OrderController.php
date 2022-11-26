@@ -21,7 +21,7 @@ class OrderController extends Controller
         $this->orderRepo = $orderRepo;
     }
 
-    public function MyOrders(MyOrdersRequest $request)
+    public function myOrders(MyOrdersRequest $request)
     {
         $orders = $this->orderRepo->MyOrders($request);
         $data = MyOrdersResource::collection($orders)->response()->getData(true);
@@ -29,7 +29,7 @@ class OrderController extends Controller
 
     }
 
-    public function OrderDetails(OrderDetailsRequest $request){
+    public function orderDetails(OrderDetailsRequest $request){
 
         $order_details = $this->orderRepo->OrderDetails($request);
         $data = new OrderDetailsResource($order_details);

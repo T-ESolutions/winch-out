@@ -17,6 +17,7 @@ class OrderImage extends Model
     ];
     const TYPE = ['user','provider'];
 
+    protected $hidden= ['created_at','updated_at'];
 
     public function order()
     {

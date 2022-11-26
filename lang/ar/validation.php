@@ -233,31 +233,22 @@ return [
         'message' => ' الرسالة',
         'file' => ' الملف',
         'receiver_id' => ' المرسل الية',
-        'order_id' => ' الطلبية',
+
         'delivery_time_id' => 'وقت التوصبل ',
         'delivery_date' => ' تاريخ التوصيل',
         'manager_email' => ' البريد الاليكترونى للمدير',
-        'image'=>'الصورة',
-        'deligate_name'=>'اسم المندوب',
-        'deligate_phone'=>'رقم جوال المندوب',
-        'branch_name'=>'اسم الفرع',
-        'branch_email'=>'البريد الاليكترونى للفرع',
-        'branch_phone'=>'رقم جوال الفرع',
-        'branch_password'=>'الرقم السري للفرع',
-        'selected_date'=>'اليوم المختار',
-        'coupon_code'=>'كوبون الخصم',
-        'old_date'=>'التاريخ القديم',
-        'new_date'=>'التاريخ الجديد',
-
-
-
-
-
-
-
-
-
-
+        'image' => 'الصورة',
+        'deligate_name' => 'اسم المندوب',
+        'deligate_phone' => 'رقم جوال المندوب',
+        'branch_name' => 'اسم الفرع',
+        'branch_email' => 'البريد الاليكترونى للفرع',
+        'branch_phone' => 'رقم جوال الفرع',
+        'branch_password' => 'الرقم السري للفرع',
+        'selected_date' => 'اليوم المختار',
+        'coupon_code' => 'كوبون الخصم',
+        'old_date' => 'التاريخ القديم',
+        'new_date' => 'التاريخ الجديد',
+        'order_id' => ' الطلب',
 
 
     ],

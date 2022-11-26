@@ -24,7 +24,7 @@ class OrderDetailsRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_id'=>'required|exists:order,id'
+            'order_id'=>'required|exists:orders,id'
         ];
     }
 }

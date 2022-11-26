@@ -71,7 +71,8 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
             Route::post('/add_suggestion', [UserController::class, 'changePassword']);
             //orders
             Route::group(['prefix' => "orders"], function () {
-                Route::get('/', [OrderController::class, 'MyOrders']);
+                Route::get('/', [OrderController::class, 'myOrders']);
+                Route::get('/details', [OrderController::class, 'orderDetails']);
             });
         });
     });
