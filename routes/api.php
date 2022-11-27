@@ -28,7 +28,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
     Route::group(['prefix' => "auth"], function () {
         //auth
-        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/login', [AuthController::class, 'logIn']);
+        Route::post('/sign-up', [AuthController::class, 'signUp']);
+        Route::post('/forget-password', [AuthController::class, 'forgetPassword']);
+        Route::post('/verify', [AuthController::class, 'verify']);
+        Route::post('/resend-code', [AuthController::class, 'resendCode']);
+        Route::post('/social-login', [AuthController::class, 'socialLogin']);
+    });
+    Route::group(['middleware' => ['auth:api', 'check_active']], function () {
+
+        Route::group(['prefix' => "auth"], function () {
+            Route::post('/change-password', [AuthController::class, 'changePassword']);
+            Route::post('/update-profile', [AuthController::class, 'updateProfile']);
+        });
     });
 });
 
@@ -54,19 +66,19 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
     Route::group(['prefix' => "auth"], function () {
         //auth
 //        Route::post('/login', [AuthController::class, 'login']);
-        Route::post('/sign-up', [AuthController::class, 'SignUp']);
-        Route::post('/verify', [AuthController::class, 'Verify']);
-        Route::post('/resend-code', [AuthController::class, 'resendCode']);
-        Route::post('/forget-password', [AuthController::class, 'ForgetPassword']);
+//        Route::post('/sign-up', [AuthController::class, 'SignUp']);
+//        Route::post('/verify', [AuthController::class, 'Verify']);
+//        Route::post('/resend-code', [AuthController::class, 'resendCode']);
+//        Route::post('/forget-password', [AuthController::class, 'ForgetPassword']);
         Route::post('/check_location', [AuthController::class, 'check_location']);
-        Route::post('/social-login', [AuthController::class, 'socialLogin']);
+//        Route::post('/social-login', [AuthController::class, 'socialLogin']);
     });
     Route::group(['middleware' => ['auth:api', 'check_active']], function () {
 
-        Route::group(['prefix' => "auth"], function () {
-            Route::post('/change-password', [AuthController::class, 'changePassword']);
-            Route::post('/update-profile', [AuthController::class, 'UpdateProfile']);
-        });
+//        Route::group(['prefix' => "auth"], function () {
+//            Route::post('/change-password', [AuthController::class, 'changePassword']);
+//            Route::post('/update-profile', [AuthController::class, 'UpdateProfile']);
+//        });
 
         Route::group(['prefix' => "user"], function () {
             //home

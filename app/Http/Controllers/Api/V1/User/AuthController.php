@@ -30,7 +30,7 @@ class AuthController extends Controller
         return response()->json(msg(not_authoize(), trans('lang.not_authorize')));
     }
 
-    public function login(Request $request)
+    public function logIn(Request $request)
     {
         $data = $request->all();
         $data['user_phone'] = $request->country_code . '' . $request->phone;
@@ -43,7 +43,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
-        $data = $this->userAuthRepository->login($request);
+        $data = $this->userAuthRepository->logIn($request);
         if(is_string($data)){
             if($data == "phoneOrPasswordIncorrect"){
                 return response()->json(msg(failed(), trans('lang.phoneOrPasswordIncorrect')));
@@ -57,7 +57,6 @@ class AuthController extends Controller
             return response()->json(msgdata(success(), trans('lang.success'), $data));
         }
     }
-
 
     public function SignUp(Request $request)
     {
@@ -75,15 +74,13 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
-        $data['user_phone'] = $request->country_code . '' . $request->phone;
-        $user = User::create($data);
-        $this->sendCode($user->email, "activate");
 
+        $data = $this->userAuthRepository->SignUp($request);
         return response()->json(msg(success(), trans('lang.CodeSent')));
 
     }
 
-    public function ForgetPassword(Request $request)
+    public function forgetPassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
 //            'phone' => 'required|min:12|regex:/(966)[0-9]{8}/',
@@ -94,16 +91,13 @@ class AuthController extends Controller
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
 
-        $this->sendCode($request->phone, "reset");
-
+        $this->userAuthRepository->sendCode($request->phone, "reset");
         return response()->json(msg(success(), trans('lang.CodeSent')));
 
     }
 
     public function changePassword(Request $request)
     {
-
-
         $validator = Validator::make($request->all(), [
             'password' => 'required|min:6|confirmed',
             'old_password' => 'nullable',
@@ -112,26 +106,12 @@ class AuthController extends Controller
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
 
-        $user = auth()->user();
-        if ($request->old_password) {
-            $old_password = Hash::check($request->old_password, $user->password);
-            if ($old_password != true) {
-                return response()->json(msg(failed(), trans('lang.old_passwordError')));
-
-            }
-        }
-        $user->password = $request->password;
-        $user->save();
-        $token = $request->bearerToken();
-
-        $data = (new UsersResources($user))->token($token);
+        $result = $this->userAuthRepository->changePassword($request);
+        $data = (new UsersResources($result));
         return response()->json(msgdata(success(), trans('lang.passwordChangedSuccess'), $data));
-
-
     }
 
-    public function UpdateProfile(Request $request)
-    {
+    public function updateProfile(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'nullable',
@@ -146,27 +126,12 @@ class AuthController extends Controller
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
 
-        $user = auth()->user();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->image = $request->image;
-        $user->gender = $request->gender;
-        $user->age = $request->age;
-        $user->weight = $request->weight;
-        $user->height = $request->height;
-        $user->phone = $request->phone;
-        $user->save();
-        $token = $request->bearerToken();
-
-        $data = (new UsersResources($user))->token($token);
+        $result = $this->userAuthRepository->updateProfile($request);
+        $data = (new UsersResources($result));
         return response()->json(msgdata(success(), trans('lang.success'), $data));
-
-
     }
 
-
-    public function Verify(Request $request)
-    {
+    public function verify(Request $request){
         $validator = Validator::make($request->all(), [
 //            'phone' => 'required|min:12|regex:/(966)[0-9]{8}/',
             'phone' => 'required|exists:users,email',
@@ -176,53 +141,12 @@ class AuthController extends Controller
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
 
-        $user = User::where('email', $request->phone)->first();
-
-//        $type = $user->active == 0 ? "activate" : "reset";
-
-        $verfication = Verfication::where('phone', $request->phone)
-            ->where('code', $request->code)
-//            ->where('type', $type)
-            ->first();
-
-
-        if ($verfication) {
-            if (!$verfication->expired_at > Carbon::now()->toDateTimeString()) {
-                return response()->json(msg(failed(), trans('lang.codeExpired')));
-            }
-//            if ($type == "activate") {
-            $user->active = 1;
-            $user->save();
-            $jwt_token = JWTAuth::fromUser($user);
-            $data = (new UsersResources($user))->token($jwt_token);
+        $result = $this->userAuthRepository->verify($request);
+        if($result){
+            $data = (new UsersResources($result));
             return response()->json(msgdata(success(), trans('lang.Verified_success'), $data));
-//            } else {
-//                $jwt_token = JWTAuth::fromUser($user);
-//                $data = (new UsersResources($user))->token($jwt_token);
-//                return response()->json(msgdata( success(), trans('lang.Verified_success'), $data));
-//            }
-        } else {
-            return response()->json(msg(failed(), trans('lang.codeError')));
         }
-
-
-    }
-
-    public function sendCode($email, $type)
-    {
-//        $code = rand(0000, 9999);
-        $code = 1111;
-        $verified = Verfication::updateOrcreate
-        (
-            [
-                'phone' => $email,
-                'code' => $code,
-                'type' => $type,
-                'expired_at' => Carbon::now()->addHour()->toDateTimeString()
-            ]
-        );
-//        Mail::to($email)->send(new SendCode($code));
-        return true;
+        return response()->json(msg(failed(), trans('lang.codeError')));
     }
 
     public function resendCode(Request $request)
@@ -235,18 +159,11 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
-        $user = User::where('email', $request->phone)->first();
 
-        $type = $user->active == 0 ? "activate" : "reset";
-
-        $this->sendCode($request->phone, $type);
-
-//        $jwt_token = JWTAuth::fromUser($user);
-//        $data = (new UsersResources($user))->token($jwt_token);
+        $this->userAuthRepository->resendCode($request);
         return response()->json(msg( success(), trans('lang.success')));
 
     }
-
 
     public function socialLogin(Request $request)
     {
@@ -258,79 +175,13 @@ class AuthController extends Controller
         if (!is_array($validator) && $validator->fails()) {
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
         }
-        // 1- check phone exists
-//        $user = User::where('email', $request->email)->first();
-//        if ($user) {
-//            if ($request->social_type == 'facebook') {
-//                $user->social_id = $request->social_id;
-//            } else {
-//                $user->social_id = $request->social_id;
-//            }
-//            if (empty($user->email_verified_at)) {
-//                $user->email_verified_at = Carbon::now();
-//            }
-//            $user->email = $request->email;
-//            $user->fcm_token = $request->device_token;
-//            $user->save();
-//            $jwt_token = JWTAuth::fromUser($user);
-//            $data = (new UsersResources($user))->token($jwt_token);
-//            return response()->json(msgdata($request, success(), trans('lang.success'), $data));
-//        }
 
-        // 2- check social id exists
+        $result = $this->userAuthRepository->socialLogin($request);
 
-        $userFound = User::where('social_id', $request->social_id)
-            ->where('provider', $request->social_type)
-            ->first();
-        if ($userFound) {
-//            $userFound->email = $request->email;
-            $userFound->fcm_token = $request->device_token;
-            $userFound->save();
-            $jwt_token = JWTAuth::fromUser($userFound);
-            $data = (new UsersResources($userFound))->token($jwt_token);
+        if($result){
+            $data = (new UsersResources($result));
             return response()->json(msgdata( success(), trans('lang.success'), $data));
         }
-
-        // 3- if not login with social before
-        try {
-
-
-            if ($request->social_type == 'facebook') { // facebook
-                $user = User::create([
-                    'social_id' => $request->social_id,
-                    'fcm_token' => $request->device_token,
-                    'email' => $request->email,
-                    'email_verified_at' => Carbon::now(),
-                    'active' => 1,
-                    'provider' => 'facebook'
-                ]);
-            } elseif ($request->social_type == 'apple') {
-                // apple
-                $user = User::create([
-                    'social_id' => $request->social_id,
-                    'fcm_token' => $request->device_token,
-                    'email' => $request->email,
-                    'email_verified_at' => Carbon::now(),
-                    'active' => 1,
-                    'provider' => 'apple'
-                ]);
-            } else {
-                // google
-                $user = User::create([
-                    'social_id' => $request->social_id,
-                    'fcm_token' => $request->device_token,
-                    'email' => $request->email,
-                    'email_verified_at' => Carbon::now(),
-                    'active' => 1,
-                    'provider' => 'google'
-                ]);
-            }
-        } catch (\Exception $e) {
-            return response()->json(msg( failed(), trans('lang.PhoneExists')));
-        }
-
-        $jwt_token = JWTAuth::fromUser($user);
-        $data = (new UsersResources($user))->token($jwt_token);
-        return response()->json(msgdata( success(), trans('lang.success'), $data));
+        return response()->json(msg( failed(), trans('lang.PhoneExists')));
     }
 }
