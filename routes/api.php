@@ -5,9 +5,9 @@ use App\Http\Controllers\Api\V1\User\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\User\AuthController;
-use App\Http\Controllers\Api\V1\user\HomeController;
-use App\Http\Controllers\Api\V1\user\UserController;
-use App\Http\Controllers\Api\V1\app\SettingsController;
+use App\Http\Controllers\Api\V1\User\HomeController;
+use App\Http\Controllers\Api\V1\User\UserController;
+use App\Http\Controllers\Api\V1\App\SettingsController;
 
 
 /*
@@ -91,6 +91,8 @@ Route::group(['prefix' => "V1", 'namespace' => 'V1'], function () {
             Route::post('/add_suggestion', [UserController::class, 'changePassword']);
             //orders
             Route::group(['prefix' => "orders"], function () {
+                Route::post('/send-order-request', [OrderController::class, 'sendOrderRequest']);
+
                 Route::get('/', [OrderController::class, 'myOrders']);
                 Route::get('/details', [OrderController::class, 'orderDetails']);
             });

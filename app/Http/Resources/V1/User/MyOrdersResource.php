@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\V1\User;
 
-use App\Http\Resources\ServicesResources;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MyOrdersResource extends JsonResource

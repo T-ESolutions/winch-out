@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Interfaces\V1\User\OrdersRepositoryInterface;
 use App\Http\Requests\V1\User\MyOrdersRequest;
 use App\Http\Requests\V1\User\OrderDetailsRequest;
+use App\Http\Requests\V1\User\SendOrderRequest;
 use App\Http\Resources\ServicesResources;
 use App\Http\Resources\V1\User\MyOrdersResource;
 use App\Http\Resources\V1\User\OrderDetailsResource;
@@ -19,6 +20,12 @@ class OrderController extends Controller
     public function __construct(OrdersRepositoryInterface $orderRepo)
     {
         $this->orderRepo = $orderRepo;
+    }
+    public function sendOrderRequest(SendOrderRequest $request)
+    {
+        $data = $this->orderRepo->sendOrderRequest($request);
+        return response()->json(msgdata(success(), trans('lang.success'), $data));
+
     }
 
     public function myOrders(MyOrdersRequest $request)

@@ -14,7 +14,7 @@ class ServiceCarCategory extends Model
         'car_category_id',
         'brand_id',
         'modell_id',
-        'year',
+        'year_id',
         'price',
         'price_km',
         'free_km',

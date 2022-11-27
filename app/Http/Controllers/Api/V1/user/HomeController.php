@@ -7,6 +7,7 @@ use App\Http\Controllers\Interfaces\V1\User\HomeRepositoryInterface;
 use App\Http\Requests\V1\User\CalculateBrandCostRequest;
 use App\Http\Requests\V1\User\ServiceQuestionsRequest;
 use App\Http\Resources\V1\User\QuestionsResources;
+use App\Http\Resources\V1\User\ServiceCarCategoryResources;
 use App\Http\Resources\V1\User\ServicesResources;
 use Illuminate\Http\Request;
 
@@ -35,8 +36,8 @@ class HomeController extends Controller
 
     public function calculateBrandCost(CalculateBrandCostRequest $request)
     {
-        $data = $this->homeRepo->serviceQuestions($request);
-        $data = (QuestionsResources::collection($data))->response()->getData(true);
+        $data = $this->homeRepo->calculateBrandCost($request);
+        $data = (new ServiceCarCategoryResources($data));
         return response()->json(msgdata(success(), trans('lang.success'), $data));
     }
 
